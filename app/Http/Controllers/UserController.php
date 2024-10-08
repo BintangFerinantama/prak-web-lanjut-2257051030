@@ -8,6 +8,16 @@ use App\Models\UserModel;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $data = [
+            'title' => 'List User',
+            'users' => $this->userModel->getUser(),
+        ];
+    
+        return view('list_user', $data);
+    }
+
     public function profile($nama = "", $kelas = "", $npm = ""){
         $data = [
             'nama' => $nama,
@@ -18,29 +28,38 @@ class UserController extends Controller
         return view('profile', $data);
     }
 
-    public function create(){
-        return view('create_user', [
-            'kelas' => Kelas::all(),
+    public function create()
+    {
+        $kelas = new Kelas();
 
-        ]);
+        $kelas = $kelas->getKelas();
+
+        $data = [
+            'title' => 'Create User',
+            'kelas' => $kelas,
+        ];
+        
+        return view('create_user', $data);
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|string|max:255',
-            'npm' => 'required|string|max:255',
-            'kelas_id' => 'required|exists:kelas,id',
-        ]);
+        $this->userModel->create([ 
+            'nama' => $request->input('nama'), 
+            'npm' => $request->input('npm'), 
+            'kelas_id' => $request->input('kelas_id'), 
+            ]); 
         
-        $user = UserModel::create($validatedData);
+            return redirect()->to('/user');
+    }
+    public $userModel;
+    public $kelasModel;
 
-        $user->load('kelas');
-
-        return view('profile', [
-            'nama' => $user->nama,
-            'npm' => $user->npm,
-            'nama_kelas' => $user->kelas->nama_kelas ?? 'Kelas tidak ditemukan',
-        ]);
+    public function __construct()
+    {
+        $this->userModel = new UserModel;
+        $this->kelasModel = new Kelas();
+        $kelas = $this->kelasModel->getKelas();
+        
     }
 }
