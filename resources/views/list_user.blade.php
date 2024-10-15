@@ -11,22 +11,38 @@
                     <th class="px-6 py-4 text-sm font-semibold text-center">Nama</th>
                     <th class="px-6 py-4 text-sm font-semibold text-center">NPM</th>
                     <th class="px-6 py-4 text-sm font-semibold text-center">Kelas</th>
+                    <th class="px-6 py-4 text-sm font-semibold text-center">Foto</th> <!-- Kolom Foto -->
                     <th class="px-6 py-4 text-sm font-semibold text-center">Aksi</th>
                 </tr>
-            </thead>    
+            </thead>
             <tbody class="bg-blue-100 divide-y divide-blue-300">
-                <?php foreach ($users as $user) { ?>
-                    <tr class="odd:bg-blue-50 even:bg-blue-100">
-                        <td class="px-6 py-4 text-blue-900 text-center"><?= $user['id'] ?></td>
-                        <td class="px-6 py-4 text-blue-900 text-center"><?= $user['nama'] ?></td>
-                        <td class="px-6 py-4 text-blue-900 text-center"><?= $user['npm'] ?></td>
-                        <td class="px-6 py-4 text-blue-900 text-center"><?= $user['nama_kelas'] ?></td>
-                        <td class="px-6 py-4 text-center">
-                            <a href="#" class="text-blue-500 hover:text-blue-700 font-medium transition">Edit</a> |
-                            <a href="#" class="text-red-500 hover:text-red-700 font-medium transition">Delete</a>
-                        </td>
+                @if ($users && $users->count() > 0)
+                    @foreach ($users as $user)
+                        <tr class="odd:bg-blue-50 even:bg-blue-100">
+                            <td class="px-6 py-4 text-blue-900 text-center">{{ $user->id }}</td>
+                            <td class="px-6 py-4 text-blue-900 text-center">{{ $user->nama }}</td>
+                            <td class="px-6 py-4 text-blue-900 text-center">{{ $user->npm }}</td>
+                            <td class="px-6 py-4 text-blue-900 text-center">{{ $user->kelas->nama_kelas }}</td>
+                            <td class="px-6 py-4 text-blue-900 text-center">
+                                @if ($user->foto)
+                                    <img src="{{ asset('upload/img/' . basename($user->foto)) }}" alt="Foto Pengguna" class="h-16 w-16 rounded-full object-cover mx-auto">
+                                @else
+                                    <span>Tidak ada foto</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning mb-3">Detail</a>
+                                <a href="#" class="text-blue-500 hover:text-blue-700 font-medium transition">Edit</a>
+                                <a href="#" class="text-red-500 hover:text-red-700 font-medium transition">Delete</a>
+                                <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Tambah Pengguna Baru</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="6" class="text-center py-4 text-blue-900">Tidak ada pengguna yang ditemukan.</td> <!-- Sesuaikan colspan menjadi 6 -->
                     </tr>
-                <?php } ?>
+                @endif
             </tbody>
         </table>
     </div>

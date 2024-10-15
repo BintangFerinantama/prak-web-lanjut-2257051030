@@ -6,7 +6,7 @@
         <div class="px-8 py-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Create User</h2>
             
-            <form action="{{ route('user.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 
                 <div class="space-y-2">
@@ -39,11 +39,16 @@
                     </select>
                 </div>
 
+                <div class="space-y-2">
+                    <label for="foto">foto:</label>
+                    <input type="file" id="foto" name="foto">
+                </div>
+
                 <div class="pt-4">
                     <button type="submit" 
                             class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
                         Create User
-                    </button>
+                    </button>   
                 </div>
             </form>
         </div>

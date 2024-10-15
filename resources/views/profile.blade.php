@@ -16,15 +16,15 @@
         <div style="margin-top: 20px; width: 100%;">
             <div style="background-color: #1e90ff; color: white; text-align: center; padding: 10px; margin-top: 10px; border-radius: 5px;">
                 <strong>Nama</strong><br>
-                <?= $nama ?>
+                <?= $user->nama ?>
             </div>
             <div style="background-color: #87cefa; color: #fff; text-align: center; padding: 10px; margin-top: 10px; border-radius: 5px;">
                 <strong>Kelas</strong><br>
-                <?= $nama_kelas ?? 'Kelas tidak ditemukan' ?>
+                <?= $user->nama_kelas ?? 'Kelas tidak ditemukan' ?>
             </div>
             <div style="background-color: #1e90ff; color: white; text-align: center; padding: 10px; margin-top: 10px; border-radius: 5px;">
                 <strong>NPM</strong><br>
-                <?= $npm ?>
+                <?= $user->npm ?>
             </div>
         </div>
     </div>
