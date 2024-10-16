@@ -31,9 +31,17 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <a href="{{ route('users.show', $user->id) }}" class="btn btn-warning mb-3">Detail</a>
-                                <a href="#" class="text-blue-500 hover:text-blue-700 font-medium transition">Edit</a>
-                                <a href="#" class="text-red-500 hover:text-red-700 font-medium transition">Delete</a>
+                                <a href="{{ route('user.show', $user['id']) }}" class="btn btn-primary btn-sm mb-3">View</a>
+                                <a href="{{ route('user.edit', $user['id']) }}" class="text-blue-500 hover:text-blue-700 font-medium transition">Edit</a>
+                                
+                                <form action="{{ route('user.destroy', $user['id']) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:text-red-700 font-medium transition btn btn-danger btn-sm"
+                                    onclick="return confirm('Apakah anda yakin ingin menghapus user ini?')">Delete</button>
+
+                                </form>
+
                                 <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Tambah Pengguna Baru</a>
                             </td>
                         </tr>
