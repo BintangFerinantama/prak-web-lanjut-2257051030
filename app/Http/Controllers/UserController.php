@@ -71,19 +71,19 @@ class UserController extends Controller
 
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
-            //Store foto in  dir uploads
-            $fotoPath = $foto->move(('upload/img'), $foto);
-        } else {
-            $fotoPath = null;
-        }
-        // Menyimpan data ke database termasuk path foto
+            $filename = time() . '_' . $foto->getClientOriginalName();
+            $foto->storeAs('uploads', $filename);
+        
             $this->userModel->create([
-            'nama' => $request->input('nama'),
-            'npm' => $request->input('npm'),
-            'kelas_id' => $request->input('kelas_id'),
-            'foto' => $fotoPath, // Menyimpan path foto
-            ]);
-            return redirect()->to('/user')->with('success', 'User berhasil ditambahkan');
+                'nama' => $request->input('nama'),
+                'npm' => $request->input('npm'),
+                'kelas_id' => $request->input('kelas_id'),
+                'foto' => $filename, // Menyimpan path foto
+                ]);
+        }
+        
+            
+        return redirect()->to('/')->with('success', 'User berhasil ditambahkan');
     }
 
     // Menampilkan detail pengguna
