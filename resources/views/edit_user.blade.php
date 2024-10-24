@@ -51,7 +51,7 @@
                     <label for="foto">foto:</label>
                     <input type="file" id="foto" name="foto" class="form-control">
                     @if($user->foto)
-                    <img src ="{{ asset($user->foto) }}" alt="User Photo" width="100" class="mt-2">
+                    <img src ="{{ asset('storage/uploads/' . basename($user->foto)) }}" alt="User Photo" width="100" class="mt-2">
                     @endif
                 </div>
 

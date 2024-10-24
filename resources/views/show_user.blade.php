@@ -19,7 +19,7 @@
             <div class="text-center">
                 <h2 class="text-xl font-semibold text-blue-600 mb-4">Foto Pengguna</h2>
                 @if ($user->foto)
-                    <img src="{{ asset('upload/img/' . basename($user->foto)) }}" alt="Foto {{ $user->nama }}" class="h-16 w-16 object-cover mx-auto">
+                    <img src="{{ asset('storage/uploads/' . basename($user->foto)) }}" alt="Foto {{ $user->nama }}" class="h-16 w-16 object-cover mx-auto">
                 @else
                     <span>Tidak ada foto</span>
                 @endif

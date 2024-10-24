@@ -14,9 +14,11 @@ class UserModel extends Model
 
     protected $fillable = [
         'nama',
-        'npm',
+        'semester',
         'kelas_id',
         'foto',
+        'jurusan',
+        'fakultas_id',
     ];
 
     public function getUser($id = null){
@@ -24,10 +26,20 @@ class UserModel extends Model
         ->select('user.*', 'kelas.nama_kelas as nama_kelas')->get()
         ->where('user.id', $id)
         ->first();
+
+        return $this->join('fakultas', 'fakultas.id', '=', 'user.fakultas_id')
+        ->select('user.*', 'fakultas.nama_fakultas as nama_fakultas')->get()
+        ->where('user.id', $id)
+        ->first();
     }
 
 
     public function kelas(){
         return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
+
+
+    public function fakultas(){
+        return $this->belongsTo(Kelas::class, 'fakultas_id');
     }
 }
