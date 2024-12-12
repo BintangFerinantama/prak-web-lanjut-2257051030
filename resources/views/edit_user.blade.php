@@ -10,7 +10,6 @@
                 @csrf
                 @method('PUT')
 
-            <h1 class="text-center">Edit Data</h1>
                 <div class="space-y-2">
                     <label for="nama" class="form-label block text-sm font-medium text-gray-700">Nama</label>
                     <input type="text" 
@@ -21,12 +20,35 @@
                            class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 </div>
 
+                <!-- Semester -->
                 <div class="space-y-2">
-                    <label for="npm" class="form-label block text-sm font-medium text-gray-700">NPM</label>
+                    <label for="semester" class="form-label block text-sm font-medium text-gray-700">Semester</label>
+                    <input type="number" 
+                           id="semester" 
+                           name="semester"
+                           value="{{ old('semester', $user->semester) }}"
+                           required 
+                           class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <!-- Jurusan -->
+                <div class="space-y-2">
+                    <label for="jurusan" class="form-label block text-sm font-medium text-gray-700">Jurusan</label>
                     <input type="text" 
-                           id="npm" 
-                           name="npm"
-                           value="{{ old('nama', $user->nama) }}"
+                           id="jurusan" 
+                           name="jurusan"
+                           value="{{ old('jurusan', $user->jurusan) }}"
+                           required 
+                           class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+
+                <!-- Fakultas -->
+                <div class="space-y-2">
+                    <label for="fakultas" class="form-label block text-sm font-medium text-gray-700">Fakultas</label>
+                    <input type="text" 
+                           id="fakultas" 
+                           name="fakultas"
+                           value="{{ old('fakultas', $user->fakultas) }}"
                            required 
                            class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 </div>
@@ -41,17 +63,16 @@
                             <option value="{{$kelasItem->id}}"
                                 {{ $kelasItem->id == $user->kelas_id ? 'selected' : '' }}>
                                 {{ $kelasItem->nama_kelas }}
-
                             </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group space-y-2">
-                    <label for="foto">foto:</label>
+                    <label for="foto">Foto:</label>
                     <input type="file" id="foto" name="foto" class="form-control">
                     @if($user->foto)
-                    <img src ="{{ asset($user->foto) }}" alt="User Photo" width="100" class="mt-2">
+                        <img src ="{{ asset($user->foto) }}" alt="User Photo" width="100" class="mt-2">
                     @endif
                 </div>
 

@@ -9,7 +9,9 @@
                 <tr class="bg-blue-600 text-white">
                     <th class="px-6 py-4 text-sm font-semibold text-center">ID</th>
                     <th class="px-6 py-4 text-sm font-semibold text-center">Nama</th>
-                    <th class="px-6 py-4 text-sm font-semibold text-center">NPM</th>
+                    <th class="px-6 py-4 text-sm font-semibold text-center">Semester</th> <!-- Kolom Semester -->
+                    <th class="px-6 py-4 text-sm font-semibold text-center">Jurusan</th> <!-- Kolom Jurusan -->
+                    <th class="px-6 py-4 text-sm font-semibold text-center">Fakultas</th> <!-- Kolom Fakultas -->
                     <th class="px-6 py-4 text-sm font-semibold text-center">Kelas</th>
                     <th class="px-6 py-4 text-sm font-semibold text-center">Foto</th> <!-- Kolom Foto -->
                     <th class="px-6 py-4 text-sm font-semibold text-center">Aksi</th>
@@ -21,7 +23,9 @@
                         <tr class="odd:bg-blue-50 even:bg-blue-100">
                             <td class="px-6 py-4 text-blue-900 text-center">{{ $user->id }}</td>
                             <td class="px-6 py-4 text-blue-900 text-center">{{ $user->nama }}</td>
-                            <td class="px-6 py-4 text-blue-900 text-center">{{ $user->npm }}</td>
+                            <td class="px-6 py-4 text-blue-900 text-center">{{ $user->semester }}</td> <!-- Tampilkan Semester -->
+                            <td class="px-6 py-4 text-blue-900 text-center">{{ $user->jurusan }}</td> <!-- Tampilkan Jurusan -->
+                            <td class="px-6 py-4 text-blue-900 text-center">{{ $user->fakultas }}</td> <!-- Tampilkan Fakultas -->
                             <td class="px-6 py-4 text-blue-900 text-center">{{ $user->kelas->nama_kelas }}</td>
                             <td class="px-6 py-4 text-blue-900 text-center">
                                 @if ($user->foto)
@@ -35,11 +39,10 @@
                                 <a href="{{ route('user.edit', $user['id']) }}" class="text-blue-500 hover:text-blue-700 font-medium transition">Edit</a>
                                 
                                 <form action="{{ route('user.destroy', $user['id']) }}" method="POST" style="display:inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:text-red-700 font-medium transition btn btn-danger btn-sm"
-                                    onclick="return confirm('Apakah anda yakin ingin menghapus user ini?')">Delete</button>
-
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:text-red-700 font-medium transition btn btn-danger btn-sm"
+                                        onclick="return confirm('Apakah anda yakin ingin menghapus user ini?')">Delete</button>
                                 </form>
 
                                 <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Tambah Pengguna Baru</a>
@@ -48,7 +51,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="6" class="text-center py-4 text-blue-900">Tidak ada pengguna yang ditemukan.</td> <!-- Sesuaikan colspan menjadi 6 -->
+                        <td colspan="8" class="text-center py-4 text-blue-900">Tidak ada pengguna yang ditemukan.</td> <!-- Sesuaikan colspan menjadi 8 -->
                     </tr>
                 @endif
             </tbody>
